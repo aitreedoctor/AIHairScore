@@ -475,7 +475,10 @@ async function runVisionAnalysis() {
     } finally {
         if (btnRunVision) btnRunVision.disabled = false;
         if (btnSubmit) btnSubmit.disabled = false;
-        if (visionStatus) visionStatus.style.display = 'none';
+        const statusEl = document.getElementById('vision-status');
+        if (statusEl) {
+            statusEl.style.setProperty('display', 'none', 'important');
+        }
     }
 }
 
