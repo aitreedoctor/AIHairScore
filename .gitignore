@@ -1,0 +1,6 @@
+venv/
+__pycache__/
+*.pyc
+.env
+backend/scalp_care.db
+backend/static/pdf/*.pdf

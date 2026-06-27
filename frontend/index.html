@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Hair Score - Premium Scalp Wellness Care</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js for Radar and Line Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css?v=scalp">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Floating Ambient Glows -->
+        <div class="ambient-glow glow-1"></div>
+        <div class="ambient-glow glow-2"></div>
+        
+        <!-- Navigation Header -->
+        <header class="app-header">
+            <div class="logo">
+                <span class="logo-text">AI HAIR</span>
+                <span class="logo-badge">SCORE</span>
+            </div>
+            <nav class="nav-links">
+                <button id="btn-nav-home" class="nav-btn active"><i class="fa-solid fa-house"></i> 홈</button>
+                <button id="btn-nav-history" class="nav-btn"><i class="fa-solid fa-clock-rotate-left"></i> 이력 추적</button>
+                <a href="admin.html" class="nav-btn admin-link" target="_blank"><i class="fa-solid fa-gears"></i> 관리 센터</a>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            
+            <!-- 1. WELCOME SCREEN -->
+            <section id="screen-welcome" class="screen active">
+                <div class="welcome-card glass-panel">
+                    <div class="welcome-visual">
+                        <div class="pulse-circle"></div>
+                        <div class="scanner-line"></div>
+                        <i class="fa-solid fa-qrcode welcome-icon"></i>
+                    </div>
+                    <h1 class="brand-title">AI Hair Score</h1>
+                    <p class="brand-subtitle">정밀 비전 AI로 완성하는 나만의 두피 건강 성적표</p>
+
+                    <div class="welcome-actions">
+                        <button id="btn-start" class="btn btn-primary btn-lg">
+                            <span>내 두피 성적표 확인하기</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. SURVEY WIZARD SCREEN -->
+            <section id="screen-survey" class="screen">
+                <div class="wizard-container glass-panel">
+                    <!-- Progress Bar -->
+                    <div class="wizard-progress">
+                        <div class="progress-step active" data-step="1">1. 프로필</div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step" data-step="2">2. 자각 증상</div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step" data-step="3">3. 두피 스캔</div>
+                    </div>
+
+                    <!-- Step 1: Profile & History -->
+                    <div id="step-1" class="wizard-step active">
+                        <h2 class="step-title">본인의 기본 프로필을 입력해 주세요.</h2>
+                        <p class="step-desc">더 정확한 분석 및 지역 연계 혜택 매칭을 위해 필요합니다.</p>
+                        
+                        <div class="form-group">
+                            <label for="user-name">이름 (성함)</label>
+                            <input type="text" id="user-name" value="박지성" placeholder="예: 홍길동">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user-age">나이 (만 연령)</label>
+                            <input type="number" id="user-age" min="1" max="120" value="28" placeholder="예: 28">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>성별</label>
+                            <div class="gender-selector">
+                                <label class="radio-card">
+                                    <input type="radio" name="user-gender" value="male" checked>
+                                    <div class="radio-content">
+                                        <i class="fa-solid fa-mars"></i>
+                                        <span>남성</span>
+                                    </div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="user-gender" value="female">
+                                    <div class="radio-content">
+                                        <i class="fa-solid fa-venus"></i>
+                                        <span>여성</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user-location">거주지/선호 지역 (시/군/구)</label>
+                            <input type="text" id="user-location" value="서울시 강남구" placeholder="예: 서울시 강남구, 경기도 분당구">
+                        </div>
+
+                        <div class="form-group">
+                            <label>탈모 관련 가족력</label>
+                            <div class="family-selector">
+                                <label class="radio-pill">
+                                    <input type="radio" name="user-family" value="paternal_side" checked>
+                                    <span>친가 유전 성향</span>
+                                </label>
+                                <label class="radio-pill">
+                                    <input type="radio" name="user-family" value="maternal_side">
+                                    <span>외가 유전 성향</span>
+                                </label>
+                                <label class="radio-pill">
+                                    <input type="radio" name="user-family" value="both_sides">
+                                    <span>양가 모두 있음</span>
+                                </label>
+                                <label class="radio-pill">
+                                    <input type="radio" name="user-family" value="none">
+                                    <span>없음 (유전성 없음)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="step-actions">
+                            <button class="btn btn-secondary btn-prev" disabled>이전</button>
+                            <button class="btn btn-primary btn-next" data-next="2">다음 단계 <i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Subjective Symptoms -->
+                    <div id="step-2" class="wizard-step">
+                        <h2 class="step-title">현재 느끼는 자각 증상을 체크해 주세요.</h2>
+                        <p class="step-desc">두피 내부 상태 분석에 중요한 자가 체크 단서가 됩니다.</p>
+
+                        <div class="symptom-grid">
+                            <label class="check-card">
+                                <input type="checkbox" name="symptoms" value="두피 열감이 심함">
+                                <div class="check-content">
+                                    <i class="fa-solid fa-fire-flame-simple icon-heat"></i>
+                                    <span>두피 열감이 심함</span>
+                                </div>
+                            </label>
+                            <label class="check-card">
+                                <input type="checkbox" name="symptoms" value="오후에 기름이 많이 짐">
+                                <div class="check-content">
+                                    <i class="fa-solid fa-droplet icon-sebum"></i>
+                                    <span>오후에 기름이 많이 짐</span>
+                                </div>
+                            </label>
+                            <label class="check-card">
+                                <input type="checkbox" name="symptoms" value="두피 가려움증 및 통증">
+                                <div class="check-content">
+                                    <i class="fa-solid fa-hand-dots icon-itch"></i>
+                                    <span>두피 가려움 및 통증</span>
+                                </div>
+                            </label>
+                            <label class="check-card">
+                                <input type="checkbox" name="symptoms" value="비듬 및 큰 각질 조각">
+                                <div class="check-content">
+                                    <i class="fa-solid fa-snowflake icon-dandruff"></i>
+                                    <span>비듬 및 각질 덩어리</span>
+                                </div>
+                            </label>
+                            <label class="check-card">
+                                <input type="checkbox" name="symptoms" value="모발이 얇고 힘이 없음">
+                                <div class="check-content">
+                                    <i class="fa-solid fa-wind icon-thin"></i>
+                                    <span>모발이 가늘고 힘이 없음</span>
+                                </div>
+                            </label>
+                            <label class="check-card">
+                                <input type="checkbox" name="symptoms" value="머리 감을 때 모발 탈락량이 많음 (배수구 막힘 등)">
+                                <div class="check-content">
+                                    <i class="fa-solid fa-soap icon-shedding"></i>
+                                    <span>머리 감을 때 많이 빠짐</span>
+                                </div>
+                            </label>
+                            <label class="check-card">
+                                <input type="checkbox" name="symptoms" value="머리 말릴 때나 빗질할 때 많이 떨어짐">
+                                <div class="check-content">
+                                    <i class="fa-solid fa-wind icon-thin"></i>
+                                    <span>머리 말릴/빗을 때 많이 빠짐</span>
+                                </div>
+                            </label>
+                            <label class="check-card">
+                                <input type="checkbox" name="symptoms" value="이전보다 가르마선이 넓어지거나 이마선(헤어라인)이 뒤로 밀림">
+                                <div class="check-content">
+                                    <i class="fa-solid fa-arrows-left-right icon-shedding"></i>
+                                    <span>가르마/이마선이 넓어짐</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="step-actions">
+                            <button class="btn btn-secondary btn-prev" data-prev="1">이전</button>
+                            <button class="btn btn-primary btn-next" data-next="3">다음 단계 <i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Scan Upload / Simulation -->
+                    <div id="step-3" class="wizard-step">
+                        <h2 class="step-title">두피 스캔 이미지를 업로드하거나 임의 설정해 주세요.</h2>
+                        <p class="step-desc">카메라로 정밀 촬영된 모근/두피 확대 사진을 올리시면 AI가 판독합니다.</p>
+
+                        <!-- Panel A: Upload Mode -->
+                        <div id="panel-upload-mode" class="upload-section">
+                            <div class="upload-mode-header">
+                                <p class="step-desc" style="margin-bottom: 0;"><i class="fa-solid fa-camera-retro"></i> 정확한 교차 분석을 위해 아래 3개 표준 촬영 부위 사진을 각각 선택하여 업로드해 주세요.</p>
+                                <button type="button" id="btn-toggle-guides" class="btn btn-secondary btn-sm" data-hidden="true" style="white-space: nowrap;"><i class="fa-solid fa-circle-info"></i> 촬영 가이드 보기</button>
+                            </div>
+                            <div class="multi-upload-grid">
+                                <!-- Slot 1: Crown -->
+                                <div class="upload-slot-card" id="slot-card-crown">
+                                    <span class="slot-badge"><i class="fa-solid fa-circle-dot"></i> 1. 정수리 (O자형 영역)</span>
+                                    <div class="upload-dropzone-mini" id="dropzone-crown">
+                                        <input type="file" id="file-input-crown" accept="image/*" style="display: none;">
+                                        <div class="dropzone-content-mini">
+                                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                                            <span>정수리 사진 업로드</span>
+                                        </div>
+                                        <div class="dropzone-preview-mini" id="preview-container-crown" style="display: none;">
+                                            <img id="preview-crown" src="" alt="정수리 스캔 미리보기">
+                                            <button type="button" id="btn-remove-crown" class="btn-remove-mini"><i class="fa-solid fa-xmark"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="slot-guide-box">
+                                        <span class="guide-label"><i class="fa-solid fa-camera"></i> 구도</span>
+                                        <p class="guide-text">카메라와 두피가 완전히 수평(90도 수직 하방)을 이뤄야 합니다.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slot 2: Front -->
+                                <div class="upload-slot-card" id="slot-card-front">
+                                    <span class="slot-badge"><i class="fa-solid fa-arrows-left-right"></i> 2. 앞머리 / 헤어라인 (앞이마)</span>
+                                    <div class="upload-dropzone-mini" id="dropzone-front">
+                                        <input type="file" id="file-input-front" accept="image/*" style="display: none;">
+                                        <div class="dropzone-content-mini">
+                                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                                            <span>앞머리 사진 업로드</span>
+                                        </div>
+                                        <div class="dropzone-preview-mini" id="preview-container-front" style="display: none;">
+                                            <img id="preview-front" src="" alt="앞머리 스캔 미리보기">
+                                            <button type="button" id="btn-remove-front" class="btn-remove-mini"><i class="fa-solid fa-xmark"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="slot-guide-box">
+                                        <span class="guide-label"><i class="fa-solid fa-camera"></i> 구도</span>
+                                        <p class="guide-text">앞머리를 위로 올리고 이마 라인 전체가 보이도록 앞면 또는 측면 45도 수평 촬영</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slot 3: Back -->
+                                <div class="upload-slot-card" id="slot-card-back">
+                                    <span class="slot-badge"><i class="fa-solid fa-circle-check"></i> 3. 후두부 (뒷머리 대조군)</span>
+                                    <div class="upload-dropzone-mini" id="dropzone-back">
+                                        <input type="file" id="file-input-back" accept="image/*" style="display: none;">
+                                        <div class="dropzone-content-mini">
+                                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                                            <span>후두부 사진 업로드</span>
+                                        </div>
+                                        <div class="dropzone-preview-mini" id="preview-container-back" style="display: none;">
+                                            <img id="preview-back" src="" alt="뒷머리 대조군 미리보기">
+                                            <button type="button" id="btn-remove-back" class="btn-remove-mini"><i class="fa-solid fa-xmark"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="slot-guide-box highlight-guide">
+                                        <span class="guide-label"><i class="fa-solid fa-camera"></i> 구도</span>
+                                        <p class="guide-text">뒷머리 정중앙 영역을 가볍게 누른 수평 구도로 촬영</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="upload-actions" style="margin-top: 15px; display: flex; justify-content: center; margin-bottom: 10px;">
+                                <button type="button" id="btn-run-vision" class="btn btn-primary btn-lg" style="width: 100%; max-width: 400px;" disabled>
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i> AI 두피 사진 분석 실행
+                                </button>
+                            </div>
+                            
+                            <div id="vision-status" class="vision-status" style="display: none; margin-bottom: 15px;">
+                                <i class="fa-solid fa-circle-notch fa-spin"></i>
+                                <span id="vision-status-text">비전 AI가 사진 분석을 통해 두피 상태를 대조 판독하는 중...</span>
+                            </div>
+                        </div>
+
+                        <!-- Panel B: Metrics Adjustment Area -->
+                        <div id="panel-sim-mode" class="metrics-section" style="margin-top: 35px; border-top: 1px solid var(--glass-border); padding-top: 25px;">
+                            <h3 class="step-title" style="font-size: 19px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                                <span><i class="fa-solid fa-sliders" style="margin-right: 8px; color: var(--primary-light);"></i> AI 분석 수치 및 보정</span>
+                                <span id="badge-ai-status" class="logo-badge" style="display: none; background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.25); color: var(--success); font-size: 12px; font-weight: 700; align-items: center; gap: 4px; border-radius: 6px; padding: 4px 10px;"><i class="fa-solid fa-robot"></i> AI 판독 완료</span>
+                            </h3>
+                            <p class="step-desc" style="margin-bottom: 20px;">AI 분석을 실행하여 점수를 자동으로 받거나, 슬라이더를 직접 움직여 원하는 상태로 보정할 수 있습니다.</p>
+                            
+                            <div class="sim-sliders">
+                                <div class="slider-group">
+                                    <div class="slider-header">
+                                        <span>홍반(붉은기)</span>
+                                        <span class="val-label" id="val-redness">0 (양호)</span>
+                                    </div>
+                                    <input type="range" id="sim-redness" min="0" max="3" value="1" step="1">
+                                </div>
+                                <div class="slider-group">
+                                    <div class="slider-header">
+                                        <span>각질(비듬)</span>
+                                        <span class="val-label" id="val-dead-skin">0 (양호)</span>
+                                    </div>
+                                    <input type="range" id="sim-dead-skin" min="0" max="3" value="1" step="1">
+                                </div>
+                                <div class="slider-group">
+                                    <div class="slider-header">
+                                        <span>피지(유분량)</span>
+                                        <span class="val-label" id="val-sebum">0 (양호)</span>
+                                    </div>
+                                    <input type="range" id="sim-sebum" min="0" max="3" value="2" step="1">
+                                </div>
+                                <div class="slider-group">
+                                    <div class="slider-header">
+                                        <span>모발 밀도</span>
+                                        <span class="val-label" id="val-density">3 (건강/풍성)</span>
+                                    </div>
+                                    <input type="range" id="sim-density" min="0" max="3" value="2" step="1">
+                                </div>
+                                <div class="slider-group">
+                                    <div class="slider-header">
+                                        <span>모발 굵기</span>
+                                        <span class="val-label" id="val-thickness">3 (건강/굵음)</span>
+                                    </div>
+                                    <input type="range" id="sim-thickness" min="0" max="3" value="2" step="1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-actions">
+                            <button class="btn btn-secondary btn-prev" data-prev="2">이전</button>
+                            <button id="btn-submit" class="btn btn-gradient">웰니스 레포트 생성 <i class="fa-solid fa-wand-magic-sparkles"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. LOADING SCREEN -->
+            <section id="screen-loading" class="screen">
+                <div class="loading-container glass-panel">
+                    <div class="loading-spinner-box">
+                        <div class="spinner-outer"></div>
+                        <div class="spinner-inner"></div>
+                        <i class="fa-solid fa-laptop-medical center-icon"></i>
+                    </div>
+                    <h2 class="loading-title">AI Hair Score가 분석 보고서를 생성하는 중...</h2>
+                    <p class="loading-desc">두피 환경 인자 판독 및 웰니스 맞춤형 케어 알고리즘 연동 중</p>
+                    
+                    <div class="loading-progress-bar">
+                        <div class="loading-fill" id="loading-bar"></div>
+                    </div>
+                    <div class="loading-status-list">
+                        <div class="status-item active" id="status-1"><i class="fa-solid fa-circle-check"></i> 두피 비전 인자 추출 완료</div>
+                        <div class="status-item" id="status-2"><i class="fa-solid fa-circle-notch fa-spin"></i> 문진 데이터 교차 대조 분석 중...</div>
+                        <div class="status-item" id="status-3"><i class="fa-solid fa-clock"></i> 초개인화 식약처 인증 성분 매칭 중...</div>
+                        <div class="status-item" id="status-4"><i class="fa-solid fa-clock"></i> AI 안전 가이드라인 적합성 검출 및 검증 중...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. RESULT REPORT SCREEN -->
+            <section id="screen-result" class="screen">
+                <div class="result-layout">
+                    
+                    <!-- Left Column: Metrics and Visuals -->
+                    <div class="result-left">
+                        <!-- Score Card -->
+                        <div class="score-card glass-panel">
+                            <h3 class="card-title">종합 두피 웰니스 점수</h3>
+                            <div class="score-gauge-box">
+                                <svg class="gauge-svg" viewBox="0 0 100 100">
+                                    <circle class="gauge-bg" cx="50" cy="50" r="45"></circle>
+                                    <circle class="gauge-fill" id="gauge-fill-circle" cx="50" cy="50" r="45" stroke-dasharray="283" stroke-dashoffset="283"></circle>
+                                </svg>
+                                <div class="gauge-center">
+                                    <span class="score-num" id="res-score">85</span>
+                                    <span class="score-unit">점</span>
+                                </div>
+                            </div>
+                            <div class="grade-badge" id="res-grade">지성 및 장벽 약화 경향</div>
+                        </div>
+
+                        <!-- Radar Chart Card -->
+                        <div class="chart-card glass-panel">
+                            <h3 class="card-title">두피 5대 핵심 인자 분석</h3>
+                            <div class="chart-container">
+                                <canvas id="radarChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: AI Analysis Report -->
+                    <div class="result-right">
+                        <!-- Report Content -->
+                        <div class="report-container glass-panel">
+                            <div class="report-header">
+                                <h2 class="report-main-title" id="report-title-label"><i class="fa-solid fa-clipboard-check"></i> 두피 분석 결과 및 케어 가이드</h2>
+                                <button id="btn-download-pdf" class="btn btn-secondary btn-sm"><i class="fa-solid fa-file-pdf"></i> PDF 리포트 받기</button>
+                            </div>
+                            
+                            <hr class="divider">
+
+                            <!-- Section 1: AI Opinion -->
+                            <div class="report-section">
+                                <h4 class="section-title"><i class="fa-solid fa-brain"></i> AI 종합 가이드 의견</h4>
+                                <div class="section-body text-block" id="res-opinion">
+                                    로딩 에러 또는 빈 데이터입니다.
+                                </div>
+                            </div>
+
+                            <!-- Section 2: Homecare Solution -->
+                            <div class="report-section">
+                                <h4 class="section-title"><i class="fa-solid fa-house-chimney-medical"></i> 초개인화 홈케어 솔루션</h4>
+                                <div class="section-body text-block solution-block" id="res-solution">
+                                    로딩 에러 또는 빈 데이터입니다.
+                                </div>
+                            </div>
+
+                            <!-- Section 3: Offline Clinic/Center Recommendation -->
+                            <div class="report-section">
+                                <h4 class="section-title"><i class="fa-solid fa-hospital"></i> 인근 정밀 두피 센터 연계 제안</h4>
+                                <p class="section-subtitle">정확한 내부 상태 추적을 위한 연계 제휴 할인점 리스트입니다.</p>
+                                <div class="partner-list" id="res-partners">
+                                    <!-- Partner clinic cards loaded dynamically -->
+                                </div>
+                            </div>
+                            
+                            <div class="medical-disclaimer-box">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <p><strong>의료법 제27조 안내:</strong> 본 분석 리포트는 정밀 의학적 탈모증 감별이나 전문의약품 처방 행위를 대체할 수 없으며, 통계적 수치 모니터링 및 웰니스 관리만을 돕는 안전한 보조 도구입니다.</p>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Actions -->
+                        <div class="result-actions">
+                            <button id="btn-history-view" class="btn btn-secondary"><i class="fa-solid fa-clock-rotate-left"></i> 이력 다시 보기</button>
+                            <button id="btn-restart" class="btn btn-gradient">새로운 분석 시작 <i class="fa-solid fa-rotate-right"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 5. HISTORY TRACKING SCREEN -->
+            <section id="screen-history" class="screen">
+                <div class="history-container glass-panel">
+                    <div class="history-header">
+                        <h2><i class="fa-solid fa-chart-line"></i> 두피 환경 모니터링 트래킹</h2>
+                        <p>지속적인 사진 측정과 자각 증상 모니터링을 통해 두피 장벽 개선 상태를 한눈에 모니터링할 수 있습니다.</p>
+                    </div>
+
+                    <!-- Progress Trend Line Chart -->
+                    <div class="trend-chart-box">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+
+                    <div class="history-list-box">
+                        <h3>과거 분석 이력 ({count}회)</h3>
+                        <div class="history-list" id="history-items-list">
+                            <!-- Dynamically loaded list of past test reports -->
+                            <div class="no-history">
+                                <i class="fa-solid fa-folder-open"></i>
+                                <p>저장된 분석 이력이 존재하지 않습니다. 먼저 첫 검사를 진행하세요!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="app-footer">
+            <p>© 2026 AI Hair Score Research Institute. Powered by Gemini Pro Vision & Wellness Analytics. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Main Javascript -->
+    <script src="app.js?v=scalp"></script>
+</body>
+</html>
